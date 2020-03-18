@@ -71,4 +71,60 @@ describe('sentence_tokenizer', function() {
         '[This is another sentence.]'
     ]);
   });
+  
+  it('should handle repetitive punctuation', function() {
+    expect(
+      tokenizer.tokenize("I love you!! Do you love me??")
+    ).toEqual([ 'I love you!!', 'Do you love me??' 
+    ]);
+  });
+
+  it('should handle repetitive punctuation with space', function() {
+    expect(
+      tokenizer.tokenize("I love you! ! Do you love me? ?")
+    ).toEqual([ 'I love you! !', 'Do you love me? ?' 
+    ]);
+  });
+
+  it('should handle decimal points in numbers', function() {
+    expect(
+      tokenizer.tokenize("Pi is approximately equal to 3.14.")
+    ).toEqual([
+      'Pi is approximately equal to 3.14.'
+    ]);
+  });
+
+  it('should handle periods in email addresses', function() {
+    expect(
+      tokenizer.tokenize("My email address is batman@example.com.")
+    ).toEqual([
+      'My email address is batman@example.com.'
+    ]);
+  });
+
+  it('should handle periods in web addresses', function() {
+    expect(
+      tokenizer.tokenize("My twitter feed can be found at https://twitter.com/user1.")
+    ).toEqual([
+      'My twitter feed can be found at https://twitter.com/user1.'
+    ]);
+  });
+
+  it('should handle an ellipsis followed by punctuation', function() {
+    expect(
+      tokenizer.tokenize("Is this the end for our heroes...?")
+    ).toEqual([
+      'Is this the end for our heroes...?'
+    ]);
+  });
+
+  it('should handle multiple spaces separating sentences', function() {
+    expect(
+      tokenizer.tokenize("Tune in tomorrow and find out!  Same Bat-Time!  Same Bat-Channel!")
+    ).toEqual([
+      'Tune in tomorrow and find out!',
+      'Same Bat-Time!',
+      'Same Bat-Channel!'
+    ]);
+  });
 });

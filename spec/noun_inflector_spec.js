@@ -29,13 +29,13 @@ describe('noun inflector', function() {
             expect(inflector.singularize('rrrs')).toBe('rrr');
             expect(inflector.singularize('hackers')).toBe('hacker');
             expect(inflector.singularize('movies')).toBe('movie');
-            
-            // MAN cases that don't pluralize to MEN            
+
+            // MAN cases that don't pluralize to MEN
             expect(inflector.singularize('talismans')).toBe('talisman');
             expect(inflector.singularize('humans')).toBe('human');
-            expect(inflector.singularize('prehumans')).toBe('prehuman');            
+            expect(inflector.singularize('prehumans')).toBe('prehuman');
         });
-        
+
         it('should handle ambiguous form', function() {
             expect(inflector.singularize('deer')).toBe('deer');
             expect(inflector.singularize('fish')).toBe('fish');
@@ -43,18 +43,21 @@ describe('noun inflector', function() {
             expect(inflector.singularize('sheep')).toBe('sheep');
             expect(inflector.singularize('trout')).toBe('trout');
         });
-        
+
         it('should convert plurals ending SES to S', function() {
             expect(inflector.singularize('statuses')).toBe('status');
             expect(inflector.singularize('buses')).toBe('bus');
-        });        
-        
+        });
+
         it('should match irregulars', function() {
             expect(inflector.singularize('people')).toBe('person');
             expect(inflector.singularize('children')).toBe('child');
             expect(inflector.singularize('oxen')).toBe('ox');
+            expect(inflector.singularize('clothes')).toBe('cloth');
+            expect(inflector.singularize('heroes')).toBe('hero');
+            expect(inflector.singularize('torsi')).toBe('torso');
         });
-        
+
         it('should handle IX cases', function() {
             expect(inflector.singularize('matrices')).toBe('matrix');
             expect(inflector.singularize('indices')).toBe('index');
@@ -63,8 +66,8 @@ describe('noun inflector', function() {
             // our pluralizer won''t cause this form of appendix (appendicies)
             // but we should handle it
             expect(inflector.singularize('appendices')).toBe('appendix');
-        });        
-        
+        });
+
         it('should regulars to ES', function() {
             expect(inflector.singularize('churches')).toBe('church');
             expect(inflector.singularize('appendixes')).toBe('appendix');
@@ -73,11 +76,11 @@ describe('noun inflector', function() {
             expect(inflector.singularize('shoes')).toBe('shoe');
             expect(inflector.singularize('funguses')).toBe('fungus');
         });
-        
+
         it('should handle SIS cases', function() {
             expect(inflector.singularize('synopses')).toBe('synopsis');
-            expect(inflector.singularize('parentheses')).toBe('parenthesis');            
-        });        
+            expect(inflector.singularize('parentheses')).toBe('parenthesis');
+        });
 
         it('should handle special OES cases', function() {
             expect(inflector.singularize('tomatoes')).toBe('tomato');
@@ -90,8 +93,15 @@ describe('noun inflector', function() {
             expect(inflector.singularize('nuclei')).toBe('nucleus');
             expect(inflector.singularize('fungi')).toBe('fungus');
             expect(inflector.singularize('cacti')).toBe('cactus');
+            expect(inflector.singularize('alumni')).toBe('alumnus');
+            expect(inflector.singularize('calculi')).toBe('calculus');
+            expect(inflector.singularize('hippopotami')).toBe('hippopotamus');
+            expect(inflector.singularize('macrofungi')).toBe('macrofungus');
+            expect(inflector.singularize('phoeti')).toBe('phoetus');
+            expect(inflector.singularize('syllabi')).toBe('syllabus');
+            expect(inflector.singularize('trophi')).toBe('trophus');
         });
-        
+
         it('should handle IVES cases', function() {
             expect(inflector.singularize('lives')).toBe('life');
             expect(inflector.singularize('knives')).toBe('knife');
@@ -114,7 +124,7 @@ describe('noun inflector', function() {
 	    expect(inflector.singularize('men')).toBe('man');
 	    expect(inflector.singularize('women')).toBe('woman');
 	    expect(inflector.singularize('workmen')).toBe('workman');
-	    expect(inflector.singularize('riflemen')).toBe('rifleman');            
+	    expect(inflector.singularize('riflemen')).toBe('rifleman');
         });
 
 	it('should handle irregular cases', function() {
@@ -123,7 +133,7 @@ describe('noun inflector', function() {
 	    expect(inflector.singularize('teeth')).toBe('tooth');
         expect(inflector.singularize('ephemerides')).toBe('ephemeris');
 	});
-        
+
 	it('should handle AE cases', function() {
 	    expect(inflector.singularize('antennae')).toBe('antenna');
 	    expect(inflector.singularize('formulae')).toBe('formula');
@@ -131,11 +141,11 @@ describe('noun inflector', function() {
 	    expect(inflector.singularize('vertebrae')).toBe('vertebra');
 	    expect(inflector.singularize('vitae')).toBe('vita');
         });
-        
+
 	it('should allow AE cases to be S', function() {
 	    expect(inflector.singularize('antennas')).toBe('antenna');
 	    expect(inflector.singularize('formulas')).toBe('formula');
-        });        
+        });
     });
 
     describe('pluralization', function() {
@@ -144,7 +154,7 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('hacker')).toBe('hackers');
             expect(inflector.pluralize('movie')).toBe('movies');
         });
-        
+
         it('should handle ambiguous form', function() {
             expect(inflector.pluralize('deer')).toBe('deer');
             expect(inflector.pluralize('fish')).toBe('fish');
@@ -152,30 +162,31 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('sheep')).toBe('sheep');
             expect(inflector.pluralize('trout')).toBe('trout');
         });
-        
+
         it('should convert singulars ending s to ses', function() {
             expect(inflector.pluralize('status')).toBe('statuses');
             expect(inflector.pluralize('bus')).toBe('buses');
         });
-        
+
         it('should match irregulars', function() {
             expect(inflector.pluralize('person')).toBe('people');
             expect(inflector.pluralize('child')).toBe('children');
             expect(inflector.pluralize('ox')).toBe('oxen');
         });
-        
+
         it('should maintain case of irregulars', function() {
             expect(inflector.pluralize('OX')).toBe('OXEN');
             expect(inflector.pluralize('Person')).toBe('People');
             expect(inflector.pluralize('child')).toBe('children');
+            expect(inflector.pluralize('cloth')).toBe('clothes');
         });
 
         it('should handle IX cases', function() {
             expect(inflector.pluralize('matrix')).toBe('matrices');
             expect(inflector.pluralize('index')).toBe('indices');
             expect(inflector.pluralize('cortex')).toBe('cortices');
-        });        
-        
+        });
+
         it('should regulars to ES', function() {
             expect(inflector.pluralize('church')).toBe('churches');
             expect(inflector.pluralize('appendix')).toBe('appendixes');
@@ -183,12 +194,12 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('quiz')).toBe('quizes');
             expect(inflector.pluralize('shoe')).toBe('shoes');
         });
-        
+
         it('should handle SIS cases', function() {
             expect(inflector.pluralize('synopsis')).toBe('synopses');
-            expect(inflector.pluralize('parenthesis')).toBe('parentheses');            
+            expect(inflector.pluralize('parenthesis')).toBe('parentheses');
         });
-        
+
         it('should handle special OES cases', function() {
             expect(inflector.pluralize('tomato')).toBe('tomatoes');
             expect(inflector.pluralize('buffalo')).toBe('buffaloes');
@@ -203,10 +214,10 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('fungus')).toBe('fungi');
             expect(inflector.pluralize('cactus')).toBe('cacti');
         });
-        
+
         it('should handle IVES cases', function() {
             expect(inflector.pluralize('knife')).toBe('knives');
-            expect(inflector.pluralize('life')).toBe('lives');            
+            expect(inflector.pluralize('life')).toBe('lives');
         });
 
         it('should handle Y cases', function() {
@@ -214,6 +225,12 @@ describe('noun inflector', function() {
             expect(inflector.pluralize('fly')).toBe('flies');
             expect(inflector.pluralize('victory')).toBe('victories');
             expect(inflector.pluralize('monstrosity')).toBe('monstrosities');
+        });
+
+        it('should handle [aeiou]Y cases', function() {
+          expect(inflector.pluralize('day')).toBe('days');
+          expect(inflector.pluralize('toy')).toBe('toys');
+          expect(inflector.pluralize('journey')).toBe('journeys');
         });
 
         it('should handle SS cases', function() {
@@ -226,7 +243,7 @@ describe('noun inflector', function() {
 	    expect(inflector.pluralize('man')).toBe('men');
 	    expect(inflector.pluralize('woman')).toBe('women');
             expect(inflector.pluralize('workman')).toBe('workmen');
-            expect(inflector.pluralize('rifleman')).toBe('riflemen');            
+            expect(inflector.pluralize('rifleman')).toBe('riflemen');
         });
 
 	it('should handle irregular cases', function() {
@@ -238,28 +255,28 @@ describe('noun inflector', function() {
             // MAN cases that don't pluralize to MEN
             expect(inflector.pluralize('talisman')).toBe('talismans');
             expect(inflector.pluralize('human')).toBe('humans');
-            expect(inflector.pluralize('prehuman')).toBe('prehumans');            
+            expect(inflector.pluralize('prehuman')).toBe('prehumans');
 	});
-        
+
 	it('should handle AE cases', function() {
 	    expect(inflector.pluralize('antenna')).toBe('antennae');
 	    expect(inflector.pluralize('formula')).toBe('formulae');
 	    expect(inflector.pluralize('nebula')).toBe('nebulae');
 	    expect(inflector.pluralize('vertebra')).toBe('vertebrae');
 	    expect(inflector.pluralize('vita')).toBe('vitae');
-        });        
+        });
     });
-    
-    describe('should pluralize and singularize string from patch', function() {
+
+    it('should pluralize and singularize string from patch', function() {
         inflector.attach();
         expect('synopsis'.pluralizeNoun()).toBe('synopses');
-        expect('synopses'.singularizeNoun()).toBe('synopsis');        
+        expect('synopses'.singularizeNoun()).toBe('synopsis');
         expect('mess'.pluralizeNoun()).toBe('messes');
         expect('messes'.singularizeNoun()).toBe('mess');
     });
 
     describe('custom inflections', function() {
-        describe('should pluralize and singularize custom forms', function() {
+        it('should pluralize and singularize custom forms', function() {
             var myInflector = new NounInflector();
             myInflector.attach();
             myInflector.addPlural(/(code|ware)/i, '$1z');
@@ -269,14 +286,14 @@ describe('noun inflector', function() {
             expect('codez'.singularizeNoun()).toBe('code');
             expect('warez'.singularizeNoun()).toBe('ware');
         });
-        
-        describe('should not break regular forms', function() {
+
+        it('should not break regular forms', function() {
             var myInflector = new NounInflector();
             myInflector.attach();
             myInflector.addPlural(/(code|ware)/i, '$1z');
             myInflector.addSingular(/(code|ware)z/i, '$1');
             expect('bus'.pluralizeNoun()).toBe('buses');
-            expect('buses'.singularizeNoun()).toBe('bus');            
+            expect('buses'.singularizeNoun()).toBe('bus');
         });
     });
 });
